@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PixelFlow - Immersive Social Sharing</title>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- DESKTOP SIDEBAR -->
+    <aside class="sidebar">
+      <div>
+        <div class="logo-container">
+          <div class="logo-icon">P</div>
+          <span class="logo-text gradient-text">PixelFlow</span>
+        </div>
+        
+        <nav class="nav-links">
+          <li>
+            <a href="#" class="nav-item active" data-view="home">
+              <i class="fa-solid fa-house"></i>
+              <span>Home</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-item" data-view="reels">
+              <i class="fa-solid fa-circle-play"></i>
+              <span>Reels</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-item" data-view="messages">
+              <i class="fa-solid fa-paper-plane"></i>
+              <span>Messages</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-item" id="nav-create-btn">
+              <i class="fa-solid fa-square-plus"></i>
+              <span>Create</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-item" data-view="profile">
+              <i class="fa-solid fa-circle-user"></i>
+              <span>Profile</span>
+            </a>
+          </li>
+        </nav>
+      </div>
+      
+      <!-- Current User Profile summary at bottom of sidebar -->
+      <div class="sidebar-profile">
+        <img src="assets/my_avatar.png" alt="My Avatar" class="sidebar-avatar currentUserAvatar">
+        <div class="sidebar-user-info">
+          <span class="sidebar-username currentUserName">Alex Rivera</span>
+          <span class="sidebar-user-handle currentUserHandle">@alex_rivera</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MOBILE BOTTOM NAVIGATION -->
+    <nav class="mobile-nav">
+      <a href="#" class="mobile-nav-item active" data-view="home">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+      </a>
+      <a href="#" class="mobile-nav-item" data-view="reels">
+        <i class="fa-solid fa-circle-play"></i>
+        <span>Reels</span>
+      </a>
+      <a href="#" class="mobile-nav-item" id="mobile-create-btn">
+        <i class="fa-solid fa-square-plus"></i>
+        <span>Create</span>
+      </a>
+      <a href="#" class="mobile-nav-item" data-view="messages">
+        <i class="fa-solid fa-paper-plane"></i>
+        <span>Messages</span>
+      </a>
+      <a href="#" class="mobile-nav-item" data-view="profile">
+        <i class="fa-solid fa-circle-user"></i>
+        <span>Profile</span>
+      </a>
+    </nav>
+
+    <!-- MAIN VIEWPORT PANELS -->
+    <main class="main-viewport">
+      
+      <!-- VIEW 1: HOME FEED -->
+      <section id="view-home" class="app-view active">
+        <div class="home-layout">
+          <!-- Main feed stream -->
+          <div class="feed-column">
+            
+            <!-- Stories Row -->
+            <div class="stories-panel glass-panel" id="stories-container">
+              <!-- Story circles populated by JS -->
+            </div>
+            
+            <!-- Posts container -->
+            <div id="posts-container">
+              <!-- Post cards populated by JS -->
+            </div>
+            
+          </div>
+          
+          <!-- Recommendations Side Panel -->
+          <div class="suggestions-column">
+            <!-- User stats brief -->
+            <div class="suggestions-card glass-panel">
+              <div class="suggestion-row">
+                <div class="suggestion-profile">
+                  <img src="assets/my_avatar.png" alt="My Avatar" class="suggestion-avatar currentUserAvatar" style="width: 48px; height: 48px; border: 2px solid var(--color-accent-pink);">
+                  <div class="sidebar-user-info">
+                    <span class="suggestion-name currentUserName" style="font-size: 15px;">Alex Rivera</span>
+                    <span class="suggestion-relation currentUserHandle">@alex_rivera</span>
+                  </div>
+                </div>
+                <button class="suggestion-follow-btn" id="switch-account-btn">Switch</button>
+              </div>
+            </div>
+            
+            <!-- Recommended Friends list -->
+            <div class="suggestions-card glass-panel">
+              <div class="suggestions-header">
+                <span class="suggestions-title">Suggestions for you</span>
+                <a href="#" class="suggestions-seeall">See All</a>
+              </div>
+              <div class="suggestion-list" id="suggestions-list">
+                <!-- Suggested profiles populated by JS -->
+              </div>
+            </div>
+            
+            <!-- Footer credits -->
+            <div style="padding: 0 16px; font-size: 11px; color: var(--text-muted); line-height: 1.6;">
+              About &bull; Help &bull; Press &bull; API &bull; Jobs &bull; Privacy &bull; Terms
+              <br><br>
+              &copy; 2026 PIXELFLOW FROM ANTIGRAVITY
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 2: REELS -->
+      <section id="view-reels" class="app-view">
+        <div class="reels-viewport">
+          <div class="reels-container" id="reels-feed-container">
+            <!-- Fullscreen Snap Video panels populated by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 3: MESSAGES -->
+      <section id="view-messages" class="app-view">
+        <div class="messages-layout">
+          
+          <!-- Left side chats manager -->
+          <div class="chats-sidebar glass-panel">
+            <div class="chats-sidebar-header">
+              <div class="chats-sidebar-title-row">
+                <span class="chats-sidebar-title">Messages</span>
+                <button class="new-chat-btn"><i class="fa-regular fa-pen-to-square"></i></button>
+              </div>
+              <div class="chat-search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Search friends..." class="chat-search-input" id="friend-search">
+              </div>
+            </div>
+            <div class="chats-list-container" id="chat-friends-list">
+              <!-- Friends lists populated by JS -->
+            </div>
+          </div>
+          
+          <!-- Right side active conversation -->
+          <div class="chat-workspace glass-panel">
+            <div id="chat-active-screen" style="display: none; height: 100%; flex-direction: column;">
+              
+              <!-- Chat Head Header -->
+              <div class="chat-workspace-header">
+                <div class="active-chat-details">
+                  <img src="" alt="" class="active-chat-avatar" id="active-chat-img">
+                  <div class="active-chat-userinfo">
+                    <span class="active-chat-name" id="active-chat-name">Zara Croft</span>
+                    <span class="active-chat-status online" id="active-chat-status">Online</span>
+                  </div>
+                </div>
+                <div class="chat-workspace-actions">
+                  <button><i class="fa-solid fa-phone"></i></button>
+                  <button><i class="fa-solid fa-video"></i></button>
+                  <button><i class="fa-solid fa-circle-info"></i></button>
+                </div>
+              </div>
+              
+              <!-- Conversations Stream -->
+              <div class="chat-messages-scroll" id="chat-messages-stream">
+                <!-- Message bubbles populated by JS -->
+              </div>
+              
+              <!-- Typing Indicator Overlay inside message section -->
+              <div style="padding: 0 24px 8px 24px; display: none;" id="typing-indicator-container">
+                <div class="typing-bubble">
+                  <span class="typing-dot"></span>
+                  <span class="typing-dot"></span>
+                  <span class="typing-dot"></span>
+                </div>
+              </div>
+              
+              <!-- Chat composer footer -->
+              <div class="chat-input-bar">
+                <button class="chat-attach-btn"><i class="fa-solid fa-paperclip"></i></button>
+                <textarea placeholder="Message..." class="chat-message-composer" id="chat-composer-input" rows="1"></textarea>
+                <button class="chat-emoji-btn"><i class="fa-regular fa-face-smile"></i></button>
+                <button class="chat-send-btn" id="chat-send-trigger"><i class="fa-solid fa-arrow-up"></i></button>
+              </div>
+              
+            </div>
+            
+            <!-- Chat Empty Welcome Panel -->
+            <div class="chat-empty-state" id="chat-welcome-screen">
+              <i class="fa-regular fa-paper-plane chat-empty-icon"></i>
+              <h3>Your Messages</h3>
+              <p style="font-size: 13px; color: var(--text-muted); max-width: 240px; text-align: center;">Send private photos, videos and messages to a friend or group.</p>
+              <button class="profile-btn profile-btn-primary" id="start-messaging-btn" style="padding: 10px 20px;">Send Message</button>
+            </div>
+            
+          </div>
+          
+        </div>
+      </section>
+
+      <!-- VIEW 4: PROFILE -->
+      <section id="view-profile" class="app-view">
+        <div class="profile-layout">
+          
+          <div class="profile-header-container">
+            <!-- Cover Header -->
+            <div class="profile-cover"></div>
+            
+            <!-- User stats and Avatar cards -->
+            <div class="profile-card">
+              <div class="profile-avatar-wrapper">
+                <img src="assets/my_avatar.png" alt="My Avatar" class="profile-avatar currentUserAvatar">
+              </div>
+              <div class="profile-info">
+                <div class="profile-title-row">
+                  <h2 class="profile-name currentUserName">Alex Rivera</h2>
+                  <div class="profile-actions-wrapper">
+                    <button class="profile-btn profile-btn-secondary" id="edit-profile-btn">Edit Profile</button>
+                    <button class="profile-btn profile-btn-secondary"><i class="fa-solid fa-gear"></i></button>
+                  </div>
+                </div>
+                
+                <div class="profile-stats-row">
+                  <div class="profile-stat">
+                    <span class="profile-stat-val" id="profile-posts-count">12</span>
+                    <span class="profile-stat-lbl">posts</span>
+                  </div>
+                  <div class="profile-stat">
+                    <span class="profile-stat-val" id="profile-followers-count">4.8k</span>
+                    <span class="profile-stat-lbl">followers</span>
+                  </div>
+                  <div class="profile-stat">
+                    <span class="profile-stat-val" id="profile-following-count">382</span>
+                    <span class="profile-stat-lbl">following</span>
+                  </div>
+                </div>
+                
+                <p class="profile-bio" id="profile-bio-text">
+                  📷 Capturing moments through a modern lens<br>
+                  🎬 Digital Creator & Cinephile<br>
+                  📍 San Francisco, CA
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Profile Feed grid selectors -->
+          <div class="profile-tabs">
+            <button class="profile-tab active" data-tab="posts">
+              <i class="fa-solid fa-grid-3x3"></i> Posts
+            </button>
+            <button class="profile-tab" data-tab="reels">
+              <i class="fa-solid fa-circle-play"></i> Reels
+            </button>
+            <button class="profile-tab" data-tab="saved">
+              <i class="fa-regular fa-bookmark"></i> Saved
+            </button>
+          </div>
+          
+          <!-- Media grids -->
+          <div class="profile-grid-posts active" id="profile-posts-grid">
+            <!-- Populated by JS -->
+          </div>
+          <div class="profile-grid-reels" id="profile-reels-grid">
+            <!-- Populated by JS -->
+          </div>
+          <div class="profile-grid-posts" id="profile-saved-grid" style="display: none;">
+            <!-- Populated by JS -->
+          </div>
+          
+        </div>
+      </section>
+      
+    </main>
+
+    <!-- CREATE MEDIA DIALOG MODAL -->
+    <div class="modal-overlay" id="create-modal-overlay">
+      <div class="modal-content glass-panel gradient-border-box">
+        <div class="modal-header">
+          <h3 class="modal-title">Create New Post</h3>
+          <button class="modal-close-btn" id="close-create-modal"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <!-- Drop file dropzone -->
+          <div class="uploader-dropzone" id="upload-zone">
+            <i class="fa-solid fa-images uploader-icon"></i>
+            <span class="uploader-text" id="upload-instruction">Drag photos/videos here or click to browse</span>
+            <input type="file" accept="image/*,video/*" class="uploader-file-input" id="media-file-input">
+            <img src="" alt="Upload Preview" class="uploader-preview-img" id="media-preview-container">
+          </div>
+          
+          <!-- Caption details & settings -->
+          <div class="create-meta-row">
+            <div class="create-meta-item">
+              <label class="create-label">Caption</label>
+              <textarea placeholder="Write a caption..." class="create-input create-textarea" id="create-caption-input"></textarea>
+            </div>
+          </div>
+          
+          <div class="create-meta-row">
+            <div class="create-meta-item">
+              <label class="create-label">Location</label>
+              <input type="text" placeholder="Add location..." class="create-input" id="create-location-input">
+            </div>
+            <div class="create-meta-item">
+              <label class="create-label">Post Type</label>
+              <select class="create-input" id="create-type-input" style="color: white; background: #0e1117;">
+                <option value="photo" selected>Photo Feed Post</option>
+                <option value="reel">Reel Clip</option>
+              </select>
+            </div>
+          </div>
+          
+          <!-- Visual Image styling filters adjustment (Only for Photo Feed) -->
+          <div class="create-filters-section" id="photo-filters-panel">
+            <label class="create-label">Visual Filters & Settings</label>
+            <div class="filters-scroll">
+              <div class="filter-preset-card active" data-filter="none">
+                <img src="" alt="Normal" class="filter-preset-thumb filter-none" id="preset-thumb-none">
+                <span class="filter-preset-label">Normal</span>
+              </div>
+              <div class="filter-preset-card" data-filter="vintage">
+                <img src="" alt="Vintage" class="filter-preset-thumb filter-vintage" id="preset-thumb-vintage">
+                <span class="filter-preset-label">Vintage</span>
+              </div>
+              <div class="filter-preset-card" data-filter="warm">
+                <img src="" alt="Warm" class="filter-preset-thumb filter-warm" id="preset-thumb-warm">
+                <span class="filter-preset-label">Warm Glow</span>
+              </div>
+              <div class="filter-preset-card" data-filter="cool">
+                <img src="" alt="Cool" class="filter-preset-thumb filter-cool" id="preset-thumb-cool">
+                <span class="filter-preset-label">Cool Air</span>
+              </div>
+              <div class="filter-preset-card" data-filter="grayscale">
+                <img src="" alt="Mono" class="filter-preset-thumb filter-grayscale" id="preset-thumb-grayscale">
+                <span class="filter-preset-label">Grayscale</span>
+              </div>
+              <div class="filter-preset-card" data-filter="dramatic">
+                <img src="" alt="Dramatic" class="filter-preset-thumb filter-dramatic" id="preset-thumb-dramatic">
+                <span class="filter-preset-label">Dramatic</span>
+              </div>
+            </div>
+            
+            <div class="sliders-container">
+              <div class="slider-control">
+                <div class="slider-label-row">
+                  <span>Brightness</span>
+                  <span id="val-brightness">100%</span>
+                </div>
+                <input type="range" min="50" max="150" value="100" class="filter-slider" id="slider-brightness">
+              </div>
+              <div class="slider-control">
+                <div class="slider-label-row">
+                  <span>Contrast</span>
+                  <span id="val-contrast">100%</span>
+                </div>
+                <input type="range" min="50" max="150" value="100" class="filter-slider" id="slider-contrast">
+              </div>
+              <div class="slider-control">
+                <div class="slider-label-row">
+                  <span>Saturation</span>
+                  <span id="val-saturation">100%</span>
+                </div>
+                <input type="range" min="0" max="200" value="100" class="filter-slider" id="slider-saturation">
+              </div>
+              <div class="slider-control">
+                <div class="slider-label-row">
+                  <span>Sepia</span>
+                  <span id="val-sepia">0%</span>
+                </div>
+                <input type="range" min="0" max="100" value="0" class="filter-slider" id="slider-sepia">
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        <div class="modal-footer">
+          <button class="profile-btn profile-btn-secondary" id="cancel-create-btn">Cancel</button>
+          <button class="profile-btn profile-btn-primary" id="publish-create-btn" style="padding-left: 24px; padding-right: 24px;">Publish</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROFILE SETTINGS DIALOG MODAL -->
+    <div class="modal-overlay" id="settings-modal-overlay">
+      <div class="modal-content glass-panel gradient-border-box" style="max-width: 480px;">
+        <div class="modal-header">
+          <h3 class="modal-title">Edit Profile</h3>
+          <button class="modal-close-btn" id="close-settings-modal"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body" style="gap: 16px;">
+          <!-- Elegant Avatar Editor with Hover Overlay -->
+          <div class="avatar-edit-container">
+            <div class="avatar-preview-wrapper">
+              <img src="assets/my_avatar.png" alt="My Avatar" class="profile-avatar currentUserAvatar" id="settings-avatar-preview">
+              <div class="avatar-edit-hover-overlay" id="avatar-picker-trigger">
+                <i class="fa-solid fa-camera"></i>
+                <span>Change Photo</span>
+              </div>
+            </div>
+            <input type="file" accept="image/*" class="uploader-file-input" id="settings-avatar-file-input">
+          </div>
+          
+          <!-- Profile Form Fields -->
+          <div class="create-meta-row">
+            <div class="create-meta-item">
+              <label class="create-label" for="settings-name-input">Full Name</label>
+              <input type="text" placeholder="Enter your full name..." class="create-input" id="settings-name-input">
+            </div>
+          </div>
+          
+          <div class="create-meta-row">
+            <div class="create-meta-item">
+              <label class="create-label" for="settings-username-input">Username / Handle</label>
+              <input type="text" placeholder="Enter username..." class="create-input" id="settings-username-input">
+              <span class="settings-error-msg" id="settings-username-error" style="display: none; color: var(--color-accent-pink); font-size: 11px; margin-top: 4px; font-weight: 500;">Username cannot be empty.</span>
+            </div>
+          </div>
+          
+          <div class="create-meta-row">
+            <div class="create-meta-item">
+              <label class="create-label" for="settings-bio-input">Biography</label>
+              <textarea placeholder="Write about yourself..." class="create-input create-textarea" id="settings-bio-input" rows="3" style="height: 80px;"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="profile-btn profile-btn-secondary" id="cancel-settings-btn">Cancel</button>
+          <button class="profile-btn profile-btn-primary" id="save-settings-btn" style="padding-left: 24px; padding-right: 24px;">Save Changes</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- STORIES VIEWING OVERLAY SLIDESHOW -->
+    <div class="story-viewer-overlay" id="story-viewer">
+      <div class="story-viewer-container">
+        
+        <!-- Story Indicators -->
+        <div class="story-progress-bars" id="story-progress-indicators">
+          <!-- Built dynamically in JS based on slide counts -->
+        </div>
+        
+        <!-- Header -->
+        <div class="story-viewer-header">
+          <div class="story-viewer-author">
+            <img src="" alt="" class="story-viewer-avatar" id="story-author-img">
+            <span class="story-viewer-username" id="story-author-name">Aria Chen</span>
+          </div>
+          <button class="story-viewer-close" id="story-close-btn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        
+        <!-- Navigation Buttons -->
+        <button class="story-nav-btn story-nav-prev" id="story-prev-btn"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="story-nav-btn story-nav-next" id="story-next-btn"><i class="fa-solid fa-chevron-right"></i></button>
+        
+        <!-- Immersive Media Viewport -->
+        <div class="story-viewer-content">
+          <img src="" alt="Story Content" class="story-viewer-image" id="story-media-content">
+        </div>
+        
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Main JavaScript Logic -->
+  <script src="app.js"></script>
+</body>
+</html>
